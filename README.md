@@ -32,9 +32,11 @@ IceDimen提供了已经创建好的不同dpi的dimens资源文件，这些文件
 
 在代码种使用：
 
-```
-public float getWidth() {
-    return getResources().getDimension(R.dimen.dpi_2160px);
+```java
+public class SampleDimen {
+    public void test() {
+        float width = getResources().getDimension(R.dimen.dpi_2160px);
+    }
 }
 ```
 
