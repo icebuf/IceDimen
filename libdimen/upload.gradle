@@ -1,0 +1,82 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+// 源代码一起打包
+task androidSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.sourceFiles
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    loadProperties('../local.properties')
+    def username = getProperty('nexus.username')
+    def password = getProperty('nexus.password')
+//    println(project.android.sourceSets.main.java.sourceFiles)
+    println(getProperty('maven.version'))
+    repositories {
+        mavenDeployer {
+            beforeDeployment {
+                MavenDeployment deployment -> signing.signPom(deployment)
+            }
+            repository(url: getProperty('maven.repo')) {
+                authentication(userName: username, password: password)
+            }
+            snapshotRepository(url: getProperty('maven.snapshot.repo')) {
+                authentication(userName: username, password: password)
+            }
+            pom.project {
+                groupId getProperty('maven.groupId')
+                artifactId  getProperty('maven.artifactId')
+                version getProperty('maven.version')
+//                packaging 'aar'
+//                description 'This is a view that is similar to the CardView of google ，but it can change the position of shadow and the shadow color of it . '
+//                url 'https://github.com/meetsl/xxx-master'
+//
+//                scm {
+//                    connection 'scm:git:https://github.com/xxx.git'
+//                    developerConnection 'scm:git:https://github.com/xxx.git'
+//                    url 'https://github.com/xxx.git'
+//                }
+//
+//                licenses {
+//                    license {
+//                        name 'The Apache License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+//
+//                developers {
+//                    developer {
+//                        id 'xxxxxx'
+//                        name 'xxxxxx'
+//                        email 'xxxxxxxx.com'
+//                    }
+//                }
+            }
+        }
+    }
+}
+
+artifacts {
+    archives androidSourcesJar
+//    archives androidJavadocsJar
+}
+
+def loadProperties(def path){
+    File file = project.file(path)
+    if(file.exists()){
+        InputStream inputStream = file.newDataInputStream();
+        Properties properties = new Properties()
+        properties.load(inputStream)
+        for (def entry : properties.entrySet()) {
+            try {
+                setProperty(entry.key, entry.value)
+                println(entry.key + " " + entry.value)
+            } catch (MissingPropertyException ignore) {
+            }
+        }
+    }
+}

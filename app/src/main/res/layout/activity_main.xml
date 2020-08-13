@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image width and height is 400px"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_60px" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/dp_400px"
+        android:layout_height="@dimen/dp_400px"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_40px"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_40px"
+        android:background="@android:color/darker_gray"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_40px"
+        android:paddingBottom="@dimen/dp_40px">
+
+        <TextView
+            android:layout_width="@dimen/dp_400px"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="This text width is 400px"
+            android:textSize="@dimen/dp_36px" />
+
+        <TextView
+            android:layout_width="@dimen/dp_200px"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_400px"
+            android:layout_marginTop="@dimen/dp_40px"
+            android:background="@color/colorPrimary"
+            android:baselineAligned="false"
+            android:text="This text width is 200px"
+            android:textSize="@dimen/dp_36px" />
+
+        <TextView
+            android:layout_width="@dimen/dp_600px"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_40px"
+            android:background="@color/colorPrimary"
+            android:text="This text width is 600px"
+            android:textSize="@dimen/dp_36px" />
+
+    </LinearLayout>
+
+</LinearLayout>
