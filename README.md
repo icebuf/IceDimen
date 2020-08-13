@@ -44,19 +44,19 @@ public class SampleDimen {
 
 - Phone 1080p xxhdpi
 
-![1](https://icebuf.oss-cn-beijing.aliyuncs.com/doc/image/phone_1080p_xxhdpi.png)
+![phone_1080p_xxhdpi](screenshot/phone_1080p_xxhdpi.png)
 - Phone 1440p xxxhdpi
 
-![2](https://icebuf.oss-cn-beijing.aliyuncs.com/doc/image/tablet_1200x1920_xhdpi.png)
+![phone_1440p_xxxhdpi](screenshot/phone_1440p_xxxhdpi.png)
 - Tablet 1200x1920 xhdpi
 
-![3](https://icebuf.oss-cn-beijing.aliyuncs.com/doc/image/tv_1920x1080_xhdpi.png)
+![Tablet_1200x1920_xhdpi](screenshot/tablet_1200x1920_xhdpi.png)
 - Tablet 2048x1536 xhdpi
 
-![4](https://icebuf.oss-cn-beijing.aliyuncs.com/doc/image/tablet_2048x1536_xhdpi.png)
+![Tablet_2048x1536_xhdpi](screenshot/tablet_2048x1536_xhdpi.png)
 - Tablet 2560x1600 xhdpi
 
-![5](https://icebuf.oss-cn-beijing.aliyuncs.com/doc/image/phone_1440p_xxxhdpi.png)
+![tablet_2560x1600_xhdpi](screenshot/tablet_2560x1600_xhdpi.png)
 - TV 1080p xhdpi
 
-![6](https://icebuf.oss-cn-beijing.aliyuncs.com/doc/image/tablet_2560x1600_xhdpi.png)
+![tv_1920x1080_xhdpi](screenshot/tv_1920x1080_xhdpi.png)
