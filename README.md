@@ -1,4 +1,8 @@
-# IceDimen
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/icebuf/icedimen)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/icebuf/icedimen)
+![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/icebuf/icedimen/master)
+![GitHub](https://img.shields.io/github/license/icebuf/icedimen)
+# IceDimen 
 
 ## 控件按比例适配
 
