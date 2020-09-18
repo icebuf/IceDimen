@@ -2,8 +2,23 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 // 源代码一起打包
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
 task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
     from android.sourceSets.main.java.sourceFiles
+}
+
+artifacts {
+    archives androidSourcesJar, androidJavadocsJar
 }
 
 signing {
@@ -28,42 +43,39 @@ uploadArchives {
                 authentication(userName: username, password: password)
             }
             pom.project {
+                name 'IceDimen'
                 groupId getProperty('maven.groupId')
                 artifactId  getProperty('maven.artifactId')
                 version getProperty('maven.version')
 //                packaging 'aar'
-//                description 'This is a view that is similar to the CardView of google ，but it can change the position of shadow and the shadow color of it . '
-//                url 'https://github.com/meetsl/xxx-master'
-//
-//                scm {
-//                    connection 'scm:git:https://github.com/xxx.git'
-//                    developerConnection 'scm:git:https://github.com/xxx.git'
-//                    url 'https://github.com/xxx.git'
-//                }
-//
-//                licenses {
-//                    license {
-//                        name 'The Apache License, Version 2.0'
-//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
-//
-//                developers {
-//                    developer {
-//                        id 'xxxxxx'
-//                        name 'xxxxxx'
-//                        email 'xxxxxxxx.com'
-//                    }
-//                }
+                description 'This is a useful library for Android to fit screen.'
+                url 'https://github.com/icebuf/IceDimen'
+                scm {
+                    connection 'scm:git:https://github.com/icebuf/IceDimen.git'
+                    developerConnection 'scm:git:https://github.com/icebuf/IceDimen.git'
+                    url 'https://github.com/icebuf/IceDimen.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'icebuf'
+                        name 'IceTang'
+                        email '1004859421@qq.com'
+                    }
+                }
             }
         }
     }
 }
 
-artifacts {
-    archives androidSourcesJar
-//    archives androidJavadocsJar
-}
+
 
 def loadProperties(def path){
     File file = project.file(path)

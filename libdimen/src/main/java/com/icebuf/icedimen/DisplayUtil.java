@@ -14,38 +14,45 @@ public class DisplayUtil {
 
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     *
+     * @param context the context
+     * @param dp      dp value
+     * @return px value
      */
-    public static int dp2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
+    public static int dp2px(Context context, float dp) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
     }
 
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     *
+     * @param context the context
+     * @param px      px value
+     * @return dp value
      */
-    public static float px2dp(Context context, int pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return pxValue / scale;
+    public static float px2dp(Context context, int px) {
+        return px / context.getResources().getDisplayMetrics().density;
     }
 
     /**
      * @param context 上下文
-     * @param pxValue 输入像素值
+     * @param px      输入像素值
      * @return 输出sp值
      */
-    public static int px2sp(Context context, float pxValue) {
-        float scaleDensity = context.getResources().getDisplayMetrics().scaledDensity;//缩放密度
-        return (int) (pxValue / scaleDensity + 0.5f);
+    public static int px2sp(Context context, float px) {
+        float scaleDensity = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (px / scaleDensity + 0.5f);
     }
 
     /**
      * @param context 上下文
-     * @param spValue 输入sp值
+     * @param sp      输入sp值
      * @return 输出像素值
      */
-    public static int sp2px(Context context, float spValue) {
+    public static int sp2px(Context context, float sp) {
         float scaleDensity = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * scaleDensity + 0.5f);
+        return (int) (sp * scaleDensity + 0.5f);
     }
 
     /**

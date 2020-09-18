@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply from: 'upload.gradle'
 
 android {
     compileSdkVersion 29
@@ -23,3 +22,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+//放在脚本末尾，里面需要用到上面加载的数据
+apply from: 'upload.gradle'

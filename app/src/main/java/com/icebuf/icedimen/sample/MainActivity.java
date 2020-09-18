@@ -11,6 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        float width = getResources().getDimension(R.dimen.dpi_4px);
+        float width = getResources().getDimension(R.dimen.dp_4px);
     }
 }
