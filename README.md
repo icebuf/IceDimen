@@ -4,6 +4,8 @@
 ![GitHub](https://img.shields.io/github/license/icebuf/icedimen)
 # IceDimen 
 
+
+
 ## 控件按比例适配
 
 有时候我们需要在Android到dimens资源文件中定义一个dimen声明表示一个控件
@@ -19,6 +21,11 @@ IceDimen提供了已经创建好的不同dpi的dimens资源文件，这些文件
 |   数值   |  120  |  160  |  240  |  320  |  480   |   640   |
 | 缩放比例  | 0.75  |   1   |  1.5  |   2   |   3    |    4    |
 | icon尺寸 | 18x18 | 24x24 | 32x32 | 48x48 | 72x72  |  96x96  |
+
+依赖导入：
+```gradle
+    implementation 'com.github.icebuf:icedimen:0.0.1'
+```
 
 在xml种使用：
 
