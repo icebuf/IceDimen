@@ -4,6 +4,7 @@ package com.icebuf.icedimen;
 import org.w3c.dom.Document;
 
 import java.io.File;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,7 +25,7 @@ public class DimenResCreator {
 
     private String mResDir = "values";
 
-    private String mResFileName = "dimen.xml";
+    private String mResFileName = "dimens.xml";
 
     private DocumentBuilderFactory mBuilderFactory;
 
@@ -40,14 +41,14 @@ public class DimenResCreator {
         mPath = resDir;
     }
 
-    public void createDimenRes(DimenRes dimenRes, int formIndex, int toIndex) throws Exception {
+    public void createDimenRes(DimenRes dimenRes, List<ElementFormat> formats) throws Exception {
         if (mBuilderFactory == null) {
             mBuilderFactory = DocumentBuilderFactory.newInstance();
         }
         if (mBuilder == null) {
             mBuilder = mBuilderFactory.newDocumentBuilder();
         }
-        Document document = dimenRes.createResDocument(mBuilder, formIndex, toIndex);
+        Document document = dimenRes.createResDocument(mBuilder, formats);
         File dir = new File(mPath, mResDir + dimenRes.getDirSuffix());
         if (!dir.exists() || !dir.isDirectory()) {
             dir.mkdirs();
@@ -98,4 +99,6 @@ public class DimenResCreator {
     public String getResFileName() {
         return mResFileName;
     }
+
+
 }

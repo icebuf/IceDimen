@@ -1,6 +1,8 @@
 package com.icebuf.icedimen;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author IceTang
@@ -12,21 +14,16 @@ public class DimenResGenerator {
 
     private String mDstPath;
 
-    private String mElementFormat;
 
-    private int mFormIndex;
+    private List<ElementFormat> mElementFormats = new ArrayList<>();
 
-    private int mToIndex;
-
-    public DimenResGenerator(String dstPath, int min, int max) {
-        this(dstPath, "dp_%dpx", min, max);
+    public DimenResGenerator(String dstPath) {
+        mDstPath = dstPath;
     }
 
-    public DimenResGenerator(String dstPath, String elementFormat, int min, int max) {
-        mDstPath = dstPath;
-        mElementFormat = elementFormat;
-        mFormIndex = min;
-        mToIndex = Math.max(max, min);
+    public DimenResGenerator addElementFormat(ElementFormat format) {
+        mElementFormats.add(format);
+        return this;
     }
 
     public void generate() throws Exception {
@@ -50,7 +47,7 @@ public class DimenResGenerator {
         DimenResCreator creator = new DimenResCreator(resDir.getPath());
         for (DPI dpi : DPI.values()) {
             if (filter == null || filter.accept(dpi)) {
-                creator.createDimenRes(new DimenRes(dpi, mElementFormat), mFormIndex, mToIndex);
+                creator.createDimenRes(new DimenRes(dpi), mElementFormats);
                 System.out.println("Create res of " + dpi.name() + " success !");
             }
         }
@@ -68,6 +65,11 @@ public class DimenResGenerator {
         File moduleFile = new File(rootPath, BuildConfig.MODULE);
         File resFile = new File(moduleFile, resPath);
 
-        new DimenResGenerator(resFile.getPath(), 0, 2560).generate();
+        new DimenResGenerator(resFile.getPath())
+                .addElementFormat(new ElementFormat(
+                        "dp_%dpx", ElementFormat.TYPE_PX2DP, 0, 1920))
+                .addElementFormat(new ElementFormat(
+                        "sp_%dpx", ElementFormat.TYPE_PX2SP, 0, 128))
+                .generate();
     }
 }
