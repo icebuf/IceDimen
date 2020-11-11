@@ -1,7 +1,11 @@
 package com.icebuf.icedimen;
 
+import android.text.TextUtils;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -25,8 +29,7 @@ public class DimenRes {
         mDpi = dpi;
     }
 
-    public Document createResDocument(DocumentBuilder builder, List<ElementFormat> formats) {
-        Document document = builder.newDocument();
+    public void makeDocument(Document document, List<ElementFormat> formats) {
         document.setXmlVersion("1.0");
         Text nextLine = document.createTextNode("\n");
         Element resources = document.createElement("resources");
@@ -35,23 +38,23 @@ public class DimenRes {
 
         float scale = DPI.getScale(mDpi);
         for (ElementFormat format : formats) {
-            String densityUnit;
-            switch (format.type) {
-                case ElementFormat.TYPE_PX2SP:
-                    densityUnit = "sp";
-                    break;
-                case ElementFormat.TYPE_PX2DP:
-                default:
-                    densityUnit = "dp";
-                    break;
-            }
+            String densityUnit = getUnit(format.type);
             for (int i = format.formPx; i <= format.toPx; i++) {
                 Element dimen = createDimenElement(document, i, scale, format.nameFormat, densityUnit);
                 resources.appendChild(dimen);
                 resources.appendChild(nextLine);
             }
         }
-        return document;
+    }
+
+    private String getUnit(int type) {
+        switch (type) {
+            case ElementFormat.TYPE_PX2SP:
+                return  "sp";
+            case ElementFormat.TYPE_PX2DP:
+                return "dp";
+        }
+        return "dp";
     }
 
     public Element createDimenElement(Document document, int px, float scale,

@@ -2,8 +2,10 @@ package com.icebuf.icedimen;
 
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -48,12 +50,15 @@ public class DimenResCreator {
         if (mBuilder == null) {
             mBuilder = mBuilderFactory.newDocumentBuilder();
         }
-        Document document = dimenRes.createResDocument(mBuilder, formats);
         File dir = new File(mPath, mResDir + dimenRes.getDirSuffix());
         if (!dir.exists() || !dir.isDirectory()) {
             dir.mkdirs();
         }
-        outputFile(document, new File(dir, mResFileName));
+        File file = new File(dir, mResFileName);
+
+        Document document = mBuilder.newDocument();;
+        dimenRes.makeDocument(document, formats);
+        outputFile(document, file);
     }
 
     private void outputFile(Document document, File file) throws Exception {
